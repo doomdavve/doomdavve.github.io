@@ -1,0 +1,12 @@
+# Site settings
+title: doomdavve
+email: davve@davve.net
+description: "I don't expect much"
+baseurl: ""
+url: "http://doomdavve.github.io"
+twitter_username: doomdavve
+github_username:  doomdavve
+
+# Build settings
+markdown: kramdown
+permalink: pretty
