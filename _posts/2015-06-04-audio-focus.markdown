@@ -2,7 +2,7 @@
 layout: post
 title:  "Audio focus"
 date:   2015-06-04 21:29:26
-categories: media audio android iod
+categories: media audio android ios
 ---
 
 Lately I've been looking into how Android and iOS handles the audio
