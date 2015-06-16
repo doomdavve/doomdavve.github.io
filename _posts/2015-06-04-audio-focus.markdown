@@ -39,7 +39,7 @@ int result =
 
 That's basically all it takes to request audio focus on Android. If
 another application (or the same application with another listener)
-already has audio focus, their listener is called with:
+already has audio focus, their listener is called:
 
 {% highlight java %}
 onAudioFocusChange(int focusChange) {
@@ -47,13 +47,17 @@ onAudioFocusChange(int focusChange) {
 }
 {% endhighlight %}
 
-where you're free to handle that focus has been lost (indicated by
-focusChange == AudioManager.AUDIOFOCUS_LOSS). You may pause or stop
-your playback.
+where you're free to handle loss of focus as indicated by
+
+{% highlight java %}
+   focusChange == AudioManager.AUDIOFOCUS_LOSS
+{% endhighlight %}
+
+As a response, you may pause or stop your playback.
 
 There is some more complexity with regards to transient interruptions
 and with ducking (lowering your volume while other audio is playing),
-but it follows the same pattern.
+but it follows the same basic pattern.
 
 iOS
 ===
@@ -67,12 +71,21 @@ session.setActive(true, withOptions: nil, error: nil)
 {% endhighlight %}
 
 This is how you may activate a media session on iOS (using swift). If
-another application had audio focus, it's paused when this code is
-executed.
+another application had audio focus, it's paused or muted at the point
+this code is executed.
+
+By default your app is entierly suspendend when the user switches to
+another app. To really test the audio focus system you need to enable
+playing audio in the background (a Info.plist thing).
 
 !!! note: is the notification working now? What if a remote control
     toggle/play event is sent here.
 
 !!! note: say something about background playing and ambient.
+
+!!! note: a big difference between iOS and Android is that it's
+    possible to have two apps playing at the same time on Android
+    while it's not on iOS. The most recently playing app is given
+    precesence and the other ones are muted.
 
 [Media Session]: https://mediasession.spec.whatwg.org/
