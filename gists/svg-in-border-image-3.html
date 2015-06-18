@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <style>
-    .test {
-        box-sizing: border-box;
-        border-image-slice: 20 fill;
-        border-style: solid;
-        outline: 1px dotted black;
-        border-image-source: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="green"/><rect x="20" y="20" width="60" height="60" fill="none" stroke-width="10" stroke="lime"/></svg>');
-    }
-    .big {
-        border-width: 40px;
-        width: 200px;
-        height: 200px;
-    }
-    .medium {
-        border-width: 20px;
-        width: 100px;
-        height: 100px;
-    }
-    .small {
-        border-width: 10px;
-        width: 50px;
-        height: 50px;
-    }
+  .test {
+      box-sizing: border-box;
+      border-image-slice: 40 fill;
+      border-style: solid;
+      outline: 1px dotted black;
+      border-image-source: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100%" height="100%" fill="green" stroke="lime" stroke-width="80"/><rect x="0" y="0" width="100%" height="100%" fill="none" stroke-width="40" stroke="green"/><rect x="30" y="15" width="10" height="10" fill="black"/><rect x="5" y="100" width="10" height="10" fill="black"/><rect x="15" y="150" width="10" height="10" fill="black"/></svg>');
+/*      border-image-source: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="green"/><rect x="20" y="20" width="60" height="60" fill="none" stroke-width="10" stroke="lime"/></svg>'); */
+  }
 </style>
+<script>
+  onload = function() {
+      function f() {
+          var borderWidthRange = document.querySelector('#borderWidthRange');
+          document.querySelector('div').style.borderWidth = borderWidthRange.value + "px";
+
+          var widthRange = document.querySelector('#widthRange');
+          document.querySelector('div').style.width = widthRange.value + "px";
+
+          var heightRange = document.querySelector('#heightRange');
+          document.querySelector('div').style.height = heightRange.value + "px";
+
+          requestAnimationFrame(f);
+      };
+      requestAnimationFrame(f);
+  };
+</script>
+<label>border-width:<input id="borderWidthRange" type="range" value="30"></label>
+<label>width:<input id="widthRange" type="range" max="500" value="100"></label>
+<label>height:<input id="heightRange" type="range" max="500" value="100"></label>
 <div class="test big"></div>
-<div class="test medium"></div>
-<div class="test small"></div>
