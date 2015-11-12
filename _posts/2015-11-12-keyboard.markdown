@@ -29,6 +29,23 @@ Swedish characters easy enough by pressing right alt and the key where
 it is on a swedish keyboard.
 
 Hopefully I won't loose it as easily now. The problem is that I store
-this inside /usr/share/X11/xkb/symbols/us and not in my home
-directory. If I could keep it in $HOME, I would be happy but putting
+this inside `/usr/share/X11/xkb/symbols/us` and not in my home
+directory. If I could keep it in `$HOME`, I would be happy but putting
 it here has to do for now.
+
+Oh, how do I activate this thing then? I use Debian and here goes my
+`/etc/default/keyboard`:
+
+{% highlight c++ %}
+# KEYBOARD CONFIGURATION FILE
+
+# Consult the keyboard(5) manual page.
+
+XKBMODEL="pc105"
+XKBLAYOUT="us"
+XKBVARIANT="davve"
+XKBOPTIONS="ctrl:nocaps"
+
+BACKSPACE="guess"
+{% endhighlight %}
+
