@@ -21,7 +21,7 @@ and so on. I used `openjdk-7-jdk`, which seems to be fine.
 
 One thing though
 
-{% highlight shell %}
+{% highlight bash %}
 $ fastboot -w flashall
 {% endhighlight %}
 
@@ -90,7 +90,7 @@ index 96d8931..bac22a1 100644
 I also have to kill the forwarded after each time, otherwise it just
 won't run next time:h
 
-{% highlight shell %}
+{% highlight bash %}
 adb shell kill $(adb shell ps | grep forward | awk '{print $2}')
 {% endhighlight %}
 
