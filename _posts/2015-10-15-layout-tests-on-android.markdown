@@ -27,7 +27,7 @@ $ fastboot -w flashall
 
 didn't work.
 
-{% highlight shell %}
+{% highlight bash %}
 davve@drogon:/archive/android$ sudo /home/davve/Android/Sdk/platform-tools/fastboot flashall -w
 error: neither -p product specified nor ANDROID_PRODUCT_OUT set
 davve@drogon:/archive/android$ find -name boot.img
@@ -42,10 +42,9 @@ davve@drogon:/archive/android$ sudo /home/davve/Android/Sdk/platform-tools/fastb
 error: could not load android-info.txt: No such file or directory
 {% endhighlight %}
 
-
 I had to flash each image in
 
-{% highlight shell %}
+{% highlight bash %}
 cd ./out/target/product/hammerhead
 sudo /home/davve/Android/Sdk/platform-tools/fastboot flash boot boot.img
 sudo /home/davve/Android/Sdk/platform-tools/fastboot flash system system.img
@@ -57,7 +56,7 @@ sudo /home/davve/Android/Sdk/platform-tools/fastboot flash recovery recovery.img
 
 But I still see font related crashers when running layout tests:
 
-{% highlight shell %}
+{% highlight bash %}
 STDOUT: 10-22 08:26:39.022  4312  4335 I chromium: [4312:4335:1022/082639:369928014:INFO:SkFontMgr_android.cpp(584)] SystemFontUse: OnlyCustom BasePath: /data/local/tmp/content_shell/fonts/ Fonts: /data/local/tmp/content_shell/android_main_fonts.xml FallbackFonts: /data/local/tmp/content_shell/android_fallback_fonts.xml
 STDOUT: 10-22 08:26:39.022  4312  4335 I chromium: 
 STDOUT: 10-22 08:26:39.022  4312  4335 I chromium: [4312:4335:1022/082639:369928240:INFO:SkFontMgr_android_parser.cpp(595)] [SkFontMgr Android Parser] '/data/local/tmp/content_shell/android_main_fonts.xml' could not be opened

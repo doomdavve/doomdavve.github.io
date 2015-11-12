@@ -1,0 +1,34 @@
+---
+layout: post
+title:  "XKB configuration"
+date:   2015-11-12 17:32:00
+categories: keyboard
+---
+
+I lost my xkb keyboard configuration in a crash recently. Until this
+afternoon I've been switching back and forth between swedish and us
+layout. It's not nice so today I decided to recreate my us variant
+again:
+
+{% highlight c++ %}
+partial alphanumeric_keys
+xkb_symbols "davve" {
+   include "us"
+   name[Group1]= "US with Swedish on top";
+
+   key <AD11> { [ bracketleft,  braceleft, aring,      Aring] };
+   key <AC10> {	[ semicolon,	colon,     adiaeresis, Adiaeresis] };
+   key <AC11> {	[ apostrophe,	quotedbl,  odiaeresis, Odiaeresis] };
+
+   include "level3(ralt_switch)"
+};
+{% endhighlight %}
+
+This little gem lets me have the sane us keyboard but still output
+Swedish characters easy enough by pressing right alt and the key where
+it is on a swedish keyboard.
+
+Hopefully I won't loose it as easily now. The problem is that I store
+this inside /usr/share/X11/xkb/symbols/us and not in my home
+directory. If I could keep it in $HOME, I would be happy but putting
+it here has to do for now.
