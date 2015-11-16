@@ -17,8 +17,8 @@ xkb_symbols "davve" {
    name[Group1]= "US with Swedish on top";
 
    key <AD11> { [ bracketleft,  braceleft, aring,      Aring] };
-   key <AC10> {	[ semicolon,	colon,     adiaeresis, Adiaeresis] };
-   key <AC11> {	[ apostrophe,	quotedbl,  odiaeresis, Odiaeresis] };
+   key <AC10> {	[ semicolon,	colon,     odiaeresis, Odiaeresis] };
+   key <AC11> {	[ apostrophe,	quotedbl,  adiaeresis, Adiaeresis] };
 
    include "level3(ralt_switch)"
 };
