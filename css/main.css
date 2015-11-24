@@ -16,8 +16,6 @@ body {
   background-color: #fdfdfd;
 }
 
-h1, h2, h3, h4, h5, h6 { font-size: 100%; font-weight: 400; }
-
 a         { color: #2a7ae2; text-decoration: none; }
 a:hover   { color: #000; text-decoration: underline; }
 a:visited { color: #205caa; }
@@ -197,6 +195,11 @@ a:visited { color: #205caa; }
   margin: 40px 0 20px;
 }
 
+.post-content h1 {
+  font-size: 40px;
+  letter-spacing: -1.25px;
+}
+
 .post-content h2 {
   font-size: 32px;
   letter-spacing: -1.25px;
@@ -229,7 +232,6 @@ a:visited { color: #205caa; }
 .post code {
   padding: 8px 12px;
   font-size: 15px;
-  overflow:scroll;
 }
 
 .post code { padding: 1px 5px; }

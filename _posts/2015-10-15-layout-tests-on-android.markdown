@@ -13,11 +13,8 @@ some of the problems I've had has not been device or platform
 specific. Regardless, having a pristine userdebug build of Android for
 testing seems worthwhile.
 
-Basically, I just followed:
-
-[Downloading and Building]
-
-and so on. I used `openjdk-7-jdk`, which seems to be fine.
+Basically, I just followed [Downloading and Building] to build AOSP. I
+used `openjdk-7-jdk`, which seems to be fine.
 
 One thing though
 
@@ -28,17 +25,17 @@ $ fastboot -w flashall
 didn't work.
 
 {% highlight bash %}
-davve@drogon:/archive/android$ sudo /home/davve/Android/Sdk/platform-tools/fastboot flashall -w
+davve@drogon:/archive/android$ sudo /archive/Android/Sdk/platform-tools/fastboot flashall -w
 error: neither -p product specified nor ANDROID_PRODUCT_OUT set
 davve@drogon:/archive/android$ find -name boot.img
 ./out/target/product/hammerhead/boot.img
-davve@drogon:/archive/android$ sudo/home/davve/Android/Sdk/platform-tools/fastboot flashall -w -p ./out/target/product/hammerhead/
-bash: sudo/home/davve/Android/Sdk/platform-tools/fastboot: No such file or directory
-davve@drogon:/archive/android$ sudo /home/davve/Android/Sdk/platform-tools/fastboot flashall -w -p ./out/target/product/hammerhead/
+davve@drogon:/archive/android$ sudo/archive/Android/Sdk/platform-tools/fastboot flashall -w -p ./out/target/product/hammerhead/
+bash: sudo/archive/Android/Sdk/platform-tools/fastboot: No such file or directory
+davve@drogon:/archive/android$ sudo /archive/Android/Sdk/platform-tools/fastboot flashall -w -p ./out/target/product/hammerhead/
 error: could not load android-info.txt: No such file or directory
 davve@drogon:/archive/android$ find -name android-info.txt
 ./out/target/product/hammerhead/android-info.txt
-davve@drogon:/archive/android$ sudo /home/davve/Android/Sdk/platform-tools/fastboot flashall -w -p ./out/target/product/hammerhead
+davve@drogon:/archive/android$ sudo /archive/Android/Sdk/platform-tools/fastboot flashall -w -p ./out/target/product/hammerhead
 error: could not load android-info.txt: No such file or directory
 {% endhighlight %}
 
@@ -46,10 +43,10 @@ I had to flash each image in
 
 {% highlight bash %}
 cd ./out/target/product/hammerhead
-sudo /home/davve/Android/Sdk/platform-tools/fastboot flash boot boot.img
-sudo /home/davve/Android/Sdk/platform-tools/fastboot flash system system.img
-sudo /home/davve/Android/Sdk/platform-tools/fastboot flash userdata userdata.img
-sudo /home/davve/Android/Sdk/platform-tools/fastboot flash recovery recovery.img
+sudo /archive/Android/Sdk/platform-tools/fastboot flash boot boot.img
+sudo /archive/Android/Sdk/platform-tools/fastboot flash system system.img
+sudo /archive/Android/Sdk/platform-tools/fastboot flash userdata userdata.img
+sudo /archive/Android/Sdk/platform-tools/fastboot flash recovery recovery.img
 {% endhighlight %}
 
 (Yep, I had to be root for fastboot to work on my machine.)
@@ -94,10 +91,29 @@ won't run next time:h
 adb shell kill $(adb shell ps | grep forward | awk '{print $2}')
 {% endhighlight %}
 
-Another patch I had to apply was
+## Good stuff ##
 
-{% highlight diff %}
+Some of these are needed, some just nice to have:
+
+{% highlight bash %}
+drogon:src/android/src% adb shell settings put global package_verifier_enable 0
+drogon:src/android/src% adb shell setprop debug.assert 1
+drogon:src/android/src% adb shell svc power stayon usb
 {% endhighlight %}
 
+## Running tests ##
+
+Select some of the tests I'm currently working on:
+
+{% highlight bash %}
+CHROMIUM_OUT_DIR=out_android build/android/test_runner.py gtest -s \
+  content_unittests --debug --gtest-filter=WebMediaSessionTest.\*
+{% endhighlight %}
+
+## Enabling flags ##
+
+{% highlight bash %}
+build/android/adb_chrome_public_command_line --enable-blink-features=MediaSession
+{% endhighlight %}
 
 [Downloading and Building]: https://source.android.com/source/requirements.html
