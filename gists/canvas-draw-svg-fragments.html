@@ -1,8 +1,11 @@
 <!DOCTYPE html>
+<style>canvas { border: 2px dashed grey; }</style>
 <title>drawImage() with SVG fragments</title>
 <script>
-    onload = function() {
+
+    function doTest() {
         var context = document.getElementsByTagName('canvas')[0].getContext('2d');
+        var forceLayout = document.body.offsetWidth;
         
         var images = document.getElementsByTagName('img');
         for (var i = 0; i < images.length; i++) {
@@ -13,9 +16,24 @@
         }
         while (images.length)
             document.body.removeChild(images.item(0));
-        
+    }
+
+    function doReference() {
+        var context = document.getElementsByTagName('canvas')[1].getContext('2d');
+        fillStyles = [ "green", "red", "blue" ];
+        fillStyles.forEach(function(fillStyle, i) {
+            context.fillStyle = fillStyle;
+            context.fillRect(i*60, i*60, 120, 120);
+        });
+    }
+    
+    onload = function() {
+        doReference();
+        doTest();
     }
 </script>
+<p>The two canvases below should look the same</p>
+<canvas width="240px" height="240px"></canvas>
 <canvas width="240px" height="240px"></canvas>
 <img src="fragment-identifiers.svg#green">
 <img src="fragment-identifiers.svg#red">
